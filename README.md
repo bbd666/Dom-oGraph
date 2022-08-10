@@ -1,3 +1,6 @@
 # domograph
- viewer de mesures d'exposition de bruit
-7mAyHaTTbDNw
+traite les mesures réalisées à l'aide de l'exposimètre développé par Dom (INRS) ?? 
+* visualise (statique ou défilement automatique) les niveaux de pression instantanés par tiers d'octaves (pleine échelle ou échelle fixe)
+* visualise les valeurs d'exposition instantanées Leq.
+* visualise les valeurs d'exposition instantanées pondérées A Leaq.
+* calcule la valeur d'exposition pondérée A équivalente sur toute la période d'exposition LeaqT.
