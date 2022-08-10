@@ -1,6 +1,7 @@
 # domograph
-traite les mesures réalisées à l'aide de l'exposimètre développé par Dom (INRS) ??
-* visualise (statique ou défilement automatique) les niveaux de pression instantanés par tiers d'octaves (pleine échelle ou échelle fixe)
-* visualise les valeurs d'exposition instantanées Leq.
-* visualise les valeurs d'exposition instantanées pondérées A Leaq.
-* calcule la valeur d'exposition pondérée A équivalente sur toute la période d'exposition LeaqT.
+traite les mesures rÃ©alisÃ©es Ã  l'aide de l'exposimÃ¨tre dÃ©veloppÃ© par Dom (INRS) ??
+* visualise (statique ou dÃ©filement automatique) les niveaux de pression instantanÃ©s par tiers d'octaves (pleine Ã©chelle ou Ã©chelle fixe)
+* visualise les valeurs d'exposition instantanÃ©es Leq.
+* visualise les valeurs d'exposition instantanÃ©es pondÃ©rÃ©es A Leaq.
+* calcule la valeur d'exposition pondÃ©rÃ©e A Ã©quivalente sur toute la pÃ©riode d'exposition LeaqT.
+* calcule Lex,8h
