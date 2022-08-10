@@ -22,6 +22,7 @@ type
     laeqt_lbl: TLabeledEdit;
     GroupBox1: TGroupBox;
     duree_lbl: TLabeledEdit;
+    dose_lbl: TLabeledEdit;
     lbldecim: TLabeledEdit;
     laeq: TLineSeries;
     current_leq: TLabeledEdit;
@@ -170,6 +171,7 @@ begin
             laeqt_lbl.visible:=true;
             duree_lbl.visible:=true;
             label2.visible:=true;
+            dose_lbl.visible:=true;
             Bargraph.Clear;
             leq.Clear;
             laeq.Clear;
@@ -327,6 +329,7 @@ begin
   current_laeq.text:=floattostrf(niveau_laeq[sel_spectre.Position],fffixed,5,2);
   laeqt_lbl.text:=floattostrf(laeqt,fffixed,5,2);
   duree_lbl.text:=floattostrf(duree,fffixed,5,2);
+  dose_lbl.text:=floattostrf(laeqt+10*ln(duree/8)/ln(10),fffixed,5,2);
   spot.XValue[0]:=IncMilliSecond(nowtime,Temps[sel_spectre.Position]);
   spot.xvalue[1]:=IncMilliSecond(nowtime,Temps[sel_spectre.Position]);
 end;

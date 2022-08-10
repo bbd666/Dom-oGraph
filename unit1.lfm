@@ -1,19 +1,19 @@
 object Form1: TForm1
   Left = 315
-  Height = 561
+  Height = 564
   Top = 188
-  Width = 733
+  Width = 762
   Caption = 'Dom''oGraph'
-  ClientHeight = 561
-  ClientWidth = 733
+  ClientHeight = 564
+  ClientWidth = 762
   OnCreate = FormCreate
   Position = poScreenCenter
   LCLVersion = '2.2.2.0'
   object Image1: TImage
     Left = 0
-    Height = 538
+    Height = 541
     Top = 0
-    Width = 733
+    Width = 762
     Align = alClient
     Picture.Data = {
       0954474946496D616765A5FB01004749463837618002E001F70000FFFFFFFFFF
@@ -4084,8 +4084,8 @@ object Form1: TForm1
   object StatusBar1: TStatusBar
     Left = 0
     Height = 23
-    Top = 538
-    Width = 733
+    Top = 541
+    Width = 762
     Panels = <    
       item
         Text = 'Pierre Lemerle'
@@ -4103,7 +4103,7 @@ object Form1: TForm1
     Left = 160
     Height = 248
     Top = 32
-    Width = 562
+    Width = 591
     AxisList = <    
       item
         Grid.Visible = False
@@ -4179,7 +4179,7 @@ object Form1: TForm1
     Left = 160
     Height = 168
     Top = 288
-    Width = 562
+    Width = 591
     AxisList = <    
       item
         Marks.LabelBrush.Style = bsClear
@@ -4323,13 +4323,13 @@ object Form1: TForm1
     Visible = False
   end
   object GroupBox1: TGroupBox
-    Left = 0
+    Left = 3
     Height = 104
     Top = 280
-    Width = 160
+    Width = 152
     Caption = 'Décimation'
     ClientHeight = 84
-    ClientWidth = 156
+    ClientWidth = 148
     Color = clMenu
     Font.Color = clMenuText
     Font.Style = [fsBold]
@@ -4372,8 +4372,8 @@ object Form1: TForm1
     Width = 56
     BorderStyle = bsNone
     EditLabel.Height = 15
-    EditLabel.Width = 32
-    EditLabel.Caption = 'LaeqT'
+    EditLabel.Width = 37
+    EditLabel.Caption = 'LaeqTe'
     EditLabel.ParentColor = False
     Enabled = False
     Font.Style = [fsBold]
@@ -4411,6 +4411,26 @@ object Form1: TForm1
     Width = 35
     Caption = 'heures'
     ParentColor = False
+    Visible = False
+  end
+  object dose_lbl: TLabeledEdit
+    Left = 664
+    Height = 15
+    Hint = 'Dose de bruit normalisée sur 8 heures'
+    Top = 496
+    Width = 56
+    BorderStyle = bsNone
+    EditLabel.Height = 15
+    EditLabel.Width = 33
+    EditLabel.Caption = 'Lex,8h'
+    EditLabel.ParentColor = False
+    Enabled = False
+    Font.Style = [fsBold]
+    LabelPosition = lpLeft
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 12
     Visible = False
   end
   object OpenDialog1: TOpenDialog
