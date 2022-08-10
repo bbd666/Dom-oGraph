@@ -73,7 +73,7 @@ var
   Temps  :array of integer;
   tiers_octave,pond:array[0..20] of real;
   nowtime:tdatetime;
-  maxnoise,laeqt,duree:real;
+  maxnoise,laeqt,duree, step:real;
 
 implementation
 
@@ -144,8 +144,9 @@ begin
                   niveau_laeq[length(niveau_laeq)-1]:=niveau_laeq[length(niveau_laeq)-1]+ exp((spectres[i,length(spectres[i])-1]+pond[i]) *ln(10)/10);
                end;
                niveau_laeq[length(niveau_laeq)-1]:=10*ln(niveau_laeq[length(niveau_laeq)-1])/ln(10);
-               laeqt:=laeqt+ exp(0.1*niveau_laeq[length(niveau_laeq)-1]*ln(10))*Temps_traitement[length(Temps_traitement)-1]/1000/3600;
-               duree:=duree+Temps_traitement[length(Temps_traitement)-1];
+               if length(Temps)>1 then step:= Temps[length(Temps)-1]-Temps[length(Temps)-2] else step:= Temps[length(Temps)-1];
+               laeqt:=laeqt+ exp(0.1*niveau_laeq[length(niveau_laeq)-1]*ln(10))*step/1000/3600;
+               duree:=duree+step;
             end;
             duree:=duree/1000/3600;
             laeqt:=10*ln(laeqt/duree)/ln(10);

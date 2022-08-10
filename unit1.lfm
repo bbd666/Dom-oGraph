@@ -4216,7 +4216,7 @@ object Form1: TForm1
   object current_leq: TLabeledEdit
     Left = 216
     Height = 15
-    Hint = 'Laeq instantané'
+    Hint = 'Leq instantané'
     Top = 496
     Width = 56
     BorderStyle = bsNone
@@ -4303,6 +4303,7 @@ object Form1: TForm1
   object current_laeq: TLabeledEdit
     Left = 312
     Height = 15
+    Hint = 'Laeq instantané'
     Top = 496
     Width = 56
     AutoSize = False
@@ -4316,6 +4317,8 @@ object Form1: TForm1
     Font.Style = [fsBold]
     LabelPosition = lpLeft
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 8
     Visible = False
   end
@@ -4384,7 +4387,7 @@ object Form1: TForm1
   object duree_lbl: TLabeledEdit
     Left = 504
     Height = 15
-    Hint = 'nombres d''heures total de l''exposition'
+    Hint = 'nombre d''heures total de l''exposition'
     Top = 496
     Width = 56
     BorderStyle = bsNone
