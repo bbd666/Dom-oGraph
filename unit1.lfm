@@ -4156,6 +4156,7 @@ object Form1: TForm1
     Height = 17
     Top = 469
     Width = 624
+    Anchors = [akLeft, akRight, akBottom]
     Max = 0
     PageSize = 0
     TabOrder = 3
@@ -4167,6 +4168,7 @@ object Form1: TForm1
     Height = 15
     Top = 496
     Width = 56
+    Anchors = [akRight, akBottom]
     BorderStyle = bsNone
     EditLabel.Height = 15
     EditLabel.Width = 35
@@ -4223,6 +4225,7 @@ object Form1: TForm1
     Hint = 'Leq instantané'
     Top = 496
     Width = 56
+    Anchors = [akRight, akBottom]
     BorderStyle = bsNone
     Color = clYellow
     EditLabel.Height = 15
@@ -4310,6 +4313,7 @@ object Form1: TForm1
     Hint = 'Laeq instantané'
     Top = 496
     Width = 56
+    Anchors = [akRight, akBottom]
     AutoSize = False
     BorderStyle = bsNone
     Color = clFuchsia
@@ -4374,6 +4378,7 @@ object Form1: TForm1
     Hint = 'Laeq sur toute la durée d''enregistrement'
     Top = 496
     Width = 56
+    Anchors = [akRight, akBottom]
     BorderStyle = bsNone
     EditLabel.Height = 15
     EditLabel.Width = 37
@@ -4394,6 +4399,7 @@ object Form1: TForm1
     Hint = 'nombre d''heures total de l''exposition'
     Top = 496
     Width = 56
+    Anchors = [akRight, akBottom]
     BorderStyle = bsNone
     EditLabel.Height = 15
     EditLabel.Width = 8
@@ -4413,6 +4419,7 @@ object Form1: TForm1
     Height = 15
     Top = 496
     Width = 35
+    Anchors = [akRight, akBottom]
     Caption = 'heures'
     ParentColor = False
     Visible = False
@@ -4423,6 +4430,7 @@ object Form1: TForm1
     Hint = 'Dose de bruit normalisée sur 8 heures'
     Top = 496
     Width = 56
+    Anchors = [akRight, akBottom]
     BorderStyle = bsNone
     EditLabel.Height = 15
     EditLabel.Width = 33
