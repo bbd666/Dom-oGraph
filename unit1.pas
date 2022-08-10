@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
   Menus, StdCtrls, TAGraph, TASeries, TATransformations, TAIntervalSources,DateUtils,
-  TAChartUtils, TADbSource ;
+  TAChartUtils, TADbSource, TASources ;
 
 type
 
@@ -29,6 +29,7 @@ type
     current_laeq: TLabeledEdit;
     DateTimeIntervalChartSource1: TDateTimeIntervalChartSource;
     Label1: TLabel;
+    ListChartSource1: TListChartSource;
     Panel1: TPanel;
     ScrollBar1: TScrollBar;
     spot: TLineSeries;
