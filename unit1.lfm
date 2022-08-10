@@ -4362,7 +4362,7 @@ object Form1: TForm1
     object Button1: TButton
       Left = 32
       Height = 25
-      Hint = 'divise la fréquence  d''acquisition par le facteur et sauvegarde dans ''Out.txt'''
+      Hint = 'divise la fréquence  d''acquisition par le facteur et sauvegarde dans ''Out.txt''. ATTENTION à l''aliasing !!! Si besoin filte anti-aliasing dans une version future'
       Top = 56
       Width = 75
       Caption = 'Décimer'
