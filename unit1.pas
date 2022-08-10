@@ -31,6 +31,7 @@ type
     Label1: TLabel;
     ListChartSource1: TListChartSource;
     Panel1: TPanel;
+    Panel2: TPanel;
     ScrollBar1: TScrollBar;
     spot: TLineSeries;
     CheckBox2: TCheckBox;
@@ -52,6 +53,7 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckBox3Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
      procedure LabeledEdit1DblClick(Sender: TObject);
     procedure LabeledEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure MenuItem1Click(Sender: TObject);
@@ -173,6 +175,7 @@ begin
             duree_lbl.visible:=true;
             label2.visible:=true;
             dose_lbl.visible:=true;
+            panel2.visible:=true;
             Bargraph.Clear;
             leq.Clear;
             laeq.Clear;
@@ -244,6 +247,11 @@ begin
     i:=i+1;pond[i]:=-2.5;
 
     SetLength(spectres,21);
+end;
+
+procedure TForm1.Image2Click(Sender: TObject);
+begin
+
 end;
 
 
