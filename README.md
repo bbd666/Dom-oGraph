@@ -6,5 +6,7 @@ Traite les mesures réalisées à l'aide de l'exposimètre développé par Dom (
 * calcule la valeur d'exposition pondérée A équivalente sur toute la période d'exposition LeaqT.
 * calcule Lex,8h
 
+     
+<br/>
 
 ![Exemple de visualisation](https://user-images.githubusercontent.com/110086114/184141468-197d7b7e-3cc2-48d6-9ee5-37de02ae21b7.png)
