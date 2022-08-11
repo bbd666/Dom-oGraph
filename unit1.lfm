@@ -4208,7 +4208,7 @@ object Form1: TForm1
       end>
     BackColor = clActiveCaption
     Title.Text.Strings = (
-      'Leq / LAeq'
+      'Leq / LAeq (dB)'
       ''
     )
     Title.Visible = True
@@ -4430,7 +4430,7 @@ object Form1: TForm1
         ParentFont = False
         TabOrder = 1
       end
-      object CheckBox3: TCheckBox
+      object defil_check: TCheckBox
         Left = 8
         Height = 19
         Top = 64
@@ -4438,7 +4438,7 @@ object Form1: TForm1
         Caption = 'défilement'
         Font.Color = clAqua
         Font.Style = [fsBold]
-        OnChange = CheckBox3Change
+        OnChange = defil_checkChange
         ParentFont = False
         TabOrder = 2
       end
@@ -4475,6 +4475,7 @@ object Form1: TForm1
     AxisList = <    
       item
         Grid.Visible = False
+        Marks.LabelFont.Height = -9
         Marks.Format = '%2:s'
         Marks.LabelBrush.Style = bsClear
         Marks.Source = ListChartSource2
@@ -4591,7 +4592,6 @@ object Form1: TForm1
       '19|19|?|8000'
       '20|20|?|10000'
     )
-    OnCompare = ListChartSource2Compare
     Left = 240
     Top = 264
   end
