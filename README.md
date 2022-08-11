@@ -1,4 +1,4 @@
-# domograph
+# Dom'ograph
 Traite les mesures réalisées à l'aide de l'exposimètre développé par Dom (INRS) 
 * visualise (statique ou défilement automatique) les niveaux de pression instantanés par tiers d'octaves (pleine échelle ou échelle fixe)
 * visualise les valeurs d'exposition instantanées Leq.
