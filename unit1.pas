@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls, math,
   Menus, StdCtrls, TAGraph, TASeries, TATransformations, TAIntervalSources,DateUtils,
-  TAChartUtils, TADbSource, TASources, TAFuncSeries, TAExpressionSeries , TACustomSource, LCLType;
+  TAChartUtils, TADbSource, TASources, TAFuncSeries, TAExpressionSeries , TACustomSource, LCLType,inifiles;
 
 type
 
@@ -19,9 +19,11 @@ type
     BarGraph: TBarSeries;
     Chart2: TChart;
     Chart3: TChart;
+    leq_visib: TCheckBox;
     colorsource: TListChartSource;
     Label3: TLabel;
     lbldecim: TEdit;
+    laeq_visib: TCheckBox;
     ListChartSource2: TListChartSource;
     map: TColorMapSeries;
     Label2: TLabel;
@@ -60,6 +62,8 @@ type
     procedure FormCreate(Sender: TObject);
      procedure LabeledEdit1DblClick(Sender: TObject);
     procedure LabeledEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure laeq_visibChange(Sender: TObject);
+    procedure leq_visibChange(Sender: TObject);
     procedure mapCalculate(const AX, AY: Double; out AZ: Double);
     procedure ScrollBar1Change(Sender: TObject);
     procedure Sel_spectreChange(Sender: TObject);
@@ -82,7 +86,8 @@ var
   tiers_octave,pond:array[0..20] of real;
   nowtime:tdatetime;
   maxnoise,laeqt,duree, step:real;
-  scalex:real;
+  scalex,fullscale:real;
+  palier:array[0..4] of real;
 
 implementation
 
@@ -110,17 +115,26 @@ begin
     if (key=VK_RETURN) and  (FileExists(LabeledEdit1.Text)) Then  load(self);
 end;
 
+procedure TForm1.laeq_visibChange(Sender: TObject);
+begin
+  laeq.active:= laeq_visib.Checked;
+end;
+
+procedure TForm1.leq_visibChange(Sender: TObject);
+begin
+   leq.active:= leq_visib.Checked;
+end;
+
 procedure TForm1.PopulateColorSource;
 const
   DUMMY = 0.0;
-  fullscale =60.;
 begin
   with ColorSource do begin
-    Add(0.2*fullscale, DUMMY, '', clBlue);         // 020 --> bley
-    Add(0.3*fullscale, DUMMY, '', clGreen);        // 0.3 --> vert
-    Add(0.7*fullscale, DUMMY, '', clYellow);       // 0.7 --> jaune
-    Add(fullscale, DUMMY, '', clRed);              // 1.0 --> rouge
-    Add(fullscale*1.5, DUMMY, '', clFuchsia);      // 1.5 --> Fuchsia
+    Add(palier[0]*fullscale, DUMMY, '', clBlue);         // 0.2 --> bley
+    Add(palier[1]*fullscale, DUMMY, '', clGreen);        // 0.3 --> vert
+    Add(palier[2]*fullscale, DUMMY, '', clYellow);       // 0.7 --> jaune
+    Add(palier[3]*fullscale, DUMMY, '', clRed);                    // 1.0 --> rouge
+    Add(palier[4]*fullscale, DUMMY, '', clFuchsia);                // 1.5 --> Fuchsia
   end;
 end;
 
@@ -245,7 +259,17 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 var
    i:integer;
+   input:tinifile;
 begin
+    input := Tinifile.Create(extractFilePath(application.exename)+'param.ini');
+    fullscale:=input.readfloat('SPECTROGRAMME','fullscale',60.0);
+    palier[0]:=input.readfloat('SPECTROGRAMME','palier_1',0.2);
+    palier[1]:=input.readfloat('SPECTROGRAMME','palier_2',0.3);
+    palier[2]:=input.readfloat('SPECTROGRAMME','palier_3',0.7);
+    palier[3]:=input.readfloat('SPECTROGRAMME','palier_4',1.0);
+    palier[4]:=input.readfloat('SPECTROGRAMME','palier_5',1.5);
+    input.free;
+
     i:=0;
     tiers_octave[i]:=100;
     i:=i+1;tiers_octave[i]:=125;
@@ -376,6 +400,8 @@ end;
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
   if sel_spectre.Position=sel_spectre.max then  sel_spectre.Position:=0 else sel_spectre.Position:=sel_spectre.Position+1;
+  leq.active:=leq_visib.Checked;
+  laeq.active:=laeq_visib.Checked;
 end;
 
 
