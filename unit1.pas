@@ -135,14 +135,14 @@ begin
   if length(spectres[0])>0 then
   begin
        vx:=(AX - ext.a.x) /(ext.b.x - ext.a.x)*scalex;
-       vy:=(AY - ext.a.y) /(ext.b.y - ext.a.y)*20;
+       vy:=(AY - ext.a.y) /(ext.b.y - ext.a.y)*21;
        indx:=min(round(vx),trunc(scalex));
        indy:=min(round(vy),20);
        indx:=max(indx,0);
        indy:=max(indy,0);
        indy:=round(ay);
        indx:=round(ax);
-       if  (indx< scalex) and (indy<20) and (indx>=0) and (indy>=0) then
+       if  (indx<= scalex) and (indy<=20) and (indx>=0) and (indy>=0) then
        AZ:=spectres[indy,round(indx*length(spectres[0])/scalex)];
    end;
 end;
