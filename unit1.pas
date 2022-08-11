@@ -5,9 +5,9 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls, math,
   Menus, StdCtrls, TAGraph, TASeries, TATransformations, TAIntervalSources,DateUtils,
-  TAChartUtils, TADbSource, TASources ;
+  TAChartUtils, TADbSource, TASources, TAFuncSeries, TAExpressionSeries , TACustomSource;
 
 type
 
@@ -18,12 +18,16 @@ type
     Chart1: TChart;
     BarGraph: TBarSeries;
     Chart2: TChart;
+    Chart3: TChart;
+    colorsource: TListChartSource;
+    Label3: TLabel;
+    lbldecim: TEdit;
+    map: TColorMapSeries;
     Label2: TLabel;
     laeqt_lbl: TLabeledEdit;
     GroupBox1: TGroupBox;
     duree_lbl: TLabeledEdit;
     dose_lbl: TLabeledEdit;
-    lbldecim: TLabeledEdit;
     laeq: TLineSeries;
     current_leq: TLabeledEdit;
     current_laeq: TLabeledEdit;
@@ -52,16 +56,19 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckBox3Change(Sender: TObject);
+    function colorsourceCompare(AItem1, AItem2: Pointer): Integer;
     procedure FormCreate(Sender: TObject);
     procedure Image2Click(Sender: TObject);
      procedure LabeledEdit1DblClick(Sender: TObject);
     procedure LabeledEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure mapCalculate(const AX, AY: Double; out AZ: Double);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
     procedure ScrollBar1Change(Sender: TObject);
     procedure Sel_spectreChange(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Load(Sender: TObject);
+    procedure PopulateColorSource;
 
   private
 
@@ -78,6 +85,7 @@ var
   tiers_octave,pond:array[0..20] of real;
   nowtime:tdatetime;
   maxnoise,laeqt,duree, step:real;
+  scalex:real;
 
 implementation
 
@@ -102,8 +110,41 @@ procedure TForm1.LabeledEdit1KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 const VK_RETURN = 13;
 begin
-
     if (key=VK_RETURN) and  (FileExists(LabeledEdit1.Text)) Then  load(self);
+end;
+
+procedure TForm1.PopulateColorSource;
+const
+  DUMMY = 0.0;
+  fullscale =100.;
+begin
+  with ColorSource do begin
+    Add(0.2*fullscale, DUMMY, '', clBlue);      // 0.0 --> blue
+    Add(0.3*fullscale, DUMMY, '', clRed);       // 0.3 --> red
+    Add(fullscale, DUMMY, '', clYellow);    // 1.0 --> yellow
+  end;
+end;
+
+procedure TForm1.mapCalculate(const AX, AY: Double; out AZ: Double);
+var
+  ext: TDoubleRect;
+  vx,vy:real;
+  indx,indy:integer;
+begin
+  ext := Chart3.GetFullExtent;
+  if length(spectres[0])>0 then
+  begin
+       vx:=(AX - ext.a.x) /(ext.b.x - ext.a.x)*scalex;
+       vy:=(AY - ext.a.y) /(ext.b.y - ext.a.y)*20;
+       indx:=min(round(vx),trunc(scalex));
+       indy:=min(round(vy),20);
+       indx:=max(indx,0);
+       indy:=max(indy,0);
+       indy:=round(ay);
+       indx:=round(ax);
+       if  (indx< scalex) and (indy<20) and (indx>=0) and (indy>=0) then
+       AZ:=spectres[indy,round(indx*length(spectres[0])/scalex)];
+   end;
 end;
 
 procedure TForm1.Load(Sender: TObject);
@@ -165,6 +206,7 @@ begin
             Sel_spectre.Max:=length(spectres[0])-1;
             chart1.visible:=true;
             chart2.visible:=true;
+            chart3.visible:=true;
             panel1.visible:=true;
             groupbox1.visible:=true;
             sel_spectre.visible:=true;
@@ -180,17 +222,21 @@ begin
             leq.Clear;
             laeq.Clear;
             spot.Clear;
+            scalex:=length(spectres[0])-1;
+            scalex:=Temps[length(spectres[0])-1]/1000;
+            Chart3.AxisList.BottomAxis.Range.Min:=0;
+            Chart3.AxisList.BottomAxis.Range.Max:=trunc(scalex);
 
             for i:=0 to 20 do Bargraph.addxy(ln(tiers_octave[i])/ln(10),spectres[i,sel_spectre.Position]);
-            for i:=0 to Sel_spectre.Max-1 do leq.addxy(IncMilliSecond(nowtime,Temps[i]),niveau[i]);
-            for i:=0 to Sel_spectre.Max-1 do laeq.addxy(IncMilliSecond(nowtime,Temps[i]),niveau_laeq[i]);
+            for i:=0 to Sel_spectre.Max-1 do leq.addxy(Temps[i]/1000,niveau[i]);
+            for i:=0 to Sel_spectre.Max-1 do laeq.addxy(Temps[i]/1000,niveau_laeq[i]);
+
             spot.AddXY(nowtime,0);
             spot.AddXY(nowtime,100);
          finally
          end;
     a.free;
 end;
-
 
 
 
@@ -247,6 +293,8 @@ begin
     i:=i+1;pond[i]:=-2.5;
 
     SetLength(spectres,21);
+    PopulateColorSource;
+
 end;
 
 procedure TForm1.Image2Click(Sender: TObject);
@@ -312,6 +360,11 @@ begin
   if checkbox3.checked then timer1.Enabled:=true else timer1.Enabled:=false;
 end;
 
+function TForm1.colorsourceCompare(AItem1, AItem2: Pointer): Integer;
+begin
+
+end;
+
 procedure TForm1.MenuItem1Click(Sender: TObject);
 begin
 
@@ -339,8 +392,10 @@ begin
   laeqt_lbl.text:=floattostrf(laeqt,fffixed,5,2);
   duree_lbl.text:=floattostrf(duree,fffixed,5,2);
   dose_lbl.text:=floattostrf(laeqt+10*ln(duree/8)/ln(10),fffixed,5,2);
-  spot.XValue[0]:=IncMilliSecond(nowtime,Temps[sel_spectre.Position]);
-  spot.xvalue[1]:=IncMilliSecond(nowtime,Temps[sel_spectre.Position]);
+  //spot.XValue[0]:=IncMilliSecond(nowtime,Temps[sel_spectre.Position]);
+  //spot.xvalue[1]:=IncMilliSecond(nowtime,Temps[sel_spectre.Position]);
+  spot.XValue[0]:=Temps[sel_spectre.Position]/1000;
+  spot.xvalue[1]:=Temps[sel_spectre.Position]/1000;
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
