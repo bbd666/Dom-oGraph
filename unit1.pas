@@ -88,6 +88,7 @@ var
   maxnoise,laeqt,duree, step:real;
   scalex,fullscale:real;
   palier:array[0..4] of real;
+  timefactor,resol,ep:real;
 
 implementation
 
@@ -130,11 +131,11 @@ const
   DUMMY = 0.0;
 begin
   with ColorSource do begin
-    Add(palier[0]*fullscale, DUMMY, '', clBlue);         // 0.2 --> bley
+    Add(palier[0]*fullscale, DUMMY, '', clBlue);         // 0.2 --> bleu
     Add(palier[1]*fullscale, DUMMY, '', clGreen);        // 0.3 --> vert
     Add(palier[2]*fullscale, DUMMY, '', clYellow);       // 0.7 --> jaune
-    Add(palier[3]*fullscale, DUMMY, '', clRed);                    // 1.0 --> rouge
-    Add(palier[4]*fullscale, DUMMY, '', clFuchsia);                // 1.5 --> Fuchsia
+    Add(palier[3]*fullscale, DUMMY, '', clRed);          // 1.0 --> rouge
+    Add(palier[4]*fullscale, DUMMY, '', clFuchsia);      // 1.5 --> Fuchsia
   end;
 end;
 
@@ -147,17 +148,18 @@ begin
   ext := Chart3.GetFullExtent;
   if length(spectres[0])>0 then
   begin
-       vx:=(AX - ext.a.x) /(ext.b.x - ext.a.x)*scalex;
+       vx:=(AX - ext.a.x) /(ext.b.x - ext.a.x);
        vy:=(AY - ext.a.y) /(ext.b.y - ext.a.y)*21;
-       indx:=min(round(vx),trunc(scalex));
+      { //indx:=min(round(vx),1);
        indy:=min(round(vy),20);
        indx:=max(indx,0);
        indy:=max(indy,0);
        indy:=round(ay);
-       indx:=round(ax);
-       if  (indx<= scalex) and (indy<=20) and (indx>=0) and (indy>=0) then
-       AZ:=spectres[indy,round(indx*length(spectres[0])/scalex)];
-       if indx=round(Temps[sel_spectre.Position]/1000) then AZ:=2*scalex;
+       indx:=round(ax); }
+        indy:=round(vy);
+       if  (vx<= 1) and (vx>=0) and (indy<=20)  and (indy>=0) then
+       AZ:=spectres[indy,round(vx*length(spectres[0]))];
+       if round(resol*vx)=round(resol*sel_spectre.Position/sel_spectre.Max) then AZ:=2*palier[4]*fullscale;
    end;
 end;
 
@@ -237,16 +239,22 @@ begin
             laeq.Clear;
             spot.Clear;
 
-            scalex:=Temps[length(spectres[0])-1]/1000;
+            scalex:=Temps[length(spectres[0])-1]/timefactor;
             Chart3.AxisList.BottomAxis.Range.Min:=0;
-            Chart3.AxisList.BottomAxis.Range.Max:=trunc(scalex);
+            Chart3.AxisList.BottomAxis.Range.Max:=scalex;
+
+            Chart2.AxisList.BottomAxis.Range.Min:=0;
+            Chart2.AxisList.BottomAxis.Range.Max:=scalex;
 
             for i:=0 to 20 do Bargraph.addxy(ln(tiers_octave[i])/ln(10),spectres[i,sel_spectre.Position]);
-            for i:=0 to Sel_spectre.Max-1 do leq.addxy(Temps[i]/1000,niveau[i]);
-            for i:=0 to Sel_spectre.Max-1 do laeq.addxy(Temps[i]/1000,niveau_laeq[i]);
+            for i:=0 to Sel_spectre.Max-1 do leq.addxy(Temps[i]/timefactor,niveau[i]);
+            for i:=0 to Sel_spectre.Max-1 do laeq.addxy(Temps[i]/timefactor,niveau_laeq[i]);
 
             spot.AddXY(nowtime,0);
             spot.AddXY(nowtime,100);
+
+            resol:=sel_spectre.max/ep;
+
          finally
          end;
     a.free;
@@ -259,16 +267,41 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 var
    i:integer;
-   input:tinifile;
+   param:tinifile;
+   t:string;
 begin
-    input := Tinifile.Create(extractFilePath(application.exename)+'param.ini');
-    fullscale:=input.readfloat('SPECTROGRAMME','fullscale',60.0);
-    palier[0]:=input.readfloat('SPECTROGRAMME','palier_1',0.2);
-    palier[1]:=input.readfloat('SPECTROGRAMME','palier_2',0.3);
-    palier[2]:=input.readfloat('SPECTROGRAMME','palier_3',0.7);
-    palier[3]:=input.readfloat('SPECTROGRAMME','palier_4',1.0);
-    palier[4]:=input.readfloat('SPECTROGRAMME','palier_5',1.5);
-    input.free;
+    param := Tinifile.Create(extractFilePath(application.exename)+'param.ini');
+    fullscale:=param.readfloat('SPECTROGRAMME','fullscale',60.0);
+    palier[0]:=param.readfloat('SPECTROGRAMME','palier_1',0.2);
+    palier[1]:=param.readfloat('SPECTROGRAMME','palier_2',0.3);
+    palier[2]:=param.readfloat('SPECTROGRAMME','palier_3',0.7);
+    palier[3]:=param.readfloat('SPECTROGRAMME','palier_4',1.0);
+    palier[4]:=param.readfloat('SPECTROGRAMME','palier_5',1.5);
+    ep:=param.readfloat('SPECTROGRAMME','epaisseur',10.0);
+    t:=param.readstring('AXES','unite_temps','s');
+    case t of
+    'ms':
+      begin
+       timefactor:=1;
+       chart2.BottomAxis.Title.Caption:='Temps (msecondes)';
+      end;
+    's':
+      begin
+       timefactor:=1000;
+       chart2.BottomAxis.Title.Caption:='Temps (secondes)';
+      end;
+    'm':
+      begin
+       timefactor:=60000;
+       chart2.BottomAxis.Title.Caption:='Temps (minutes)';
+      end;
+    'h':
+      begin
+       timefactor:=3600000;
+       chart2.BottomAxis.Title.Caption:='Temps (heures)';
+      end;
+    end;
+    param.free;
 
     i:=0;
     tiers_octave[i]:=100;
@@ -392,16 +425,14 @@ begin
   laeqt_lbl.text:=floattostrf(laeqt,fffixed,5,2);
   duree_lbl.text:=floattostrf(duree,fffixed,5,2);
   dose_lbl.text:=floattostrf(laeqt+10*ln(duree/8)/ln(10),fffixed,5,2);
-  spot.XValue[0]:=Temps[sel_spectre.Position]/1000;
-  spot.xvalue[1]:=Temps[sel_spectre.Position]/1000;
+  spot.XValue[0]:=Temps[sel_spectre.Position]/timefactor;
+  spot.xvalue[1]:=Temps[sel_spectre.Position]/timefactor;
   if not(defil_check.Checked) then chart3.Repaint;
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
   if sel_spectre.Position=sel_spectre.max then  sel_spectre.Position:=0 else sel_spectre.Position:=sel_spectre.Position+1;
-  leq.active:=leq_visib.Checked;
-  laeq.active:=laeq_visib.Checked;
 end;
 
 

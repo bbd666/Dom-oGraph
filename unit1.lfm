@@ -4101,7 +4101,7 @@ object Form1: TForm1
   end
   object Chart1: TChart
     Left = 184
-    Height = 184
+    Height = 192
     Top = 32
     Width = 577
     AxisList = <    
