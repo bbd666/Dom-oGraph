@@ -4183,10 +4183,10 @@ object Form1: TForm1
     Visible = False
   end
   object Chart2: TChart
-    Left = 192
+    Left = 184
     Height = 160
     Top = 376
-    Width = 569
+    Width = 577
     AxisList = <    
       item
         Marks.LabelBrush.Style = bsClear
@@ -4468,14 +4468,17 @@ object Form1: TForm1
     end
   end
   object Chart3: TChart
-    Left = 192
+    Left = 184
     Height = 152
     Top = 224
-    Width = 569
+    Width = 577
     AxisList = <    
       item
         Grid.Visible = False
+        Marks.Format = '%2:s'
         Marks.LabelBrush.Style = bsClear
+        Marks.Source = ListChartSource2
+        Marks.Style = smsLabel
         Minors = <>
         Range.Max = 20
         Range.UseMax = True
@@ -4557,11 +4560,39 @@ object Form1: TForm1
       '8000|8000|?|'
       '10000|10000|?|'
     )
-    Left = 56
-    Top = 248
+    Left = 432
+    Top = 104
   end
   object colorsource: TListChartSource
     Left = 120
     Top = 280
+  end
+  object ListChartSource2: TListChartSource
+    DataPoints.Strings = (
+      '0|0|?|100'
+      '1|1|?|125'
+      '2|2|?|160'
+      '3|3|?|200'
+      '4|4|?|250'
+      '5|5|?|315'
+      '6|6|?|400'
+      '7|7|?|500'
+      '8|8|?|630'
+      '9|9|?|800'
+      '10|10|?|1000'
+      '11|11|?|1250'
+      '12|12|?|1600'
+      '13|13|?|2000'
+      '14|14|?|2500'
+      '15|15|?|3150'
+      '16|16|?|4000'
+      '17|17|?|5000'
+      '18|18|?|6300'
+      '19|19|?|8000'
+      '20|20|?|10000'
+    )
+    OnCompare = ListChartSource2Compare
+    Left = 240
+    Top = 264
   end
 end

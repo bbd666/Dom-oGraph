@@ -22,6 +22,7 @@ type
     colorsource: TListChartSource;
     Label3: TLabel;
     lbldecim: TEdit;
+    ListChartSource2: TListChartSource;
     map: TColorMapSeries;
     Label2: TLabel;
     laeqt_lbl: TLabeledEdit;
@@ -61,6 +62,7 @@ type
     procedure Image2Click(Sender: TObject);
      procedure LabeledEdit1DblClick(Sender: TObject);
     procedure LabeledEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    function ListChartSource2Compare(AItem1, AItem2: Pointer): Integer;
     procedure mapCalculate(const AX, AY: Double; out AZ: Double);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
@@ -111,6 +113,11 @@ procedure TForm1.LabeledEdit1KeyDown(Sender: TObject; var Key: Word;
 const VK_RETURN = 13;
 begin
     if (key=VK_RETURN) and  (FileExists(LabeledEdit1.Text)) Then  load(self);
+end;
+
+function TForm1.ListChartSource2Compare(AItem1, AItem2: Pointer): Integer;
+begin
+
 end;
 
 procedure TForm1.PopulateColorSource;
