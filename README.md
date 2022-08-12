@@ -5,6 +5,7 @@ Traite les mesures réalisées à l'aide de l'exposimètre développé par Dom (
 * visualise les valeurs d'exposition instantanées pondérées A Leaq.
 * calcule la valeur d'exposition pondérée A équivalente sur toute la période d'exposition LeaqT.
 * calcule Lex,8h
+* diagramme temps fréquence
 
      
 <br/>
