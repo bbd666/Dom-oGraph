@@ -151,7 +151,7 @@ begin
   if length(spectres[0])>0 then
   begin
        vx:=(AX - ext.a.x) /(ext.b.x - ext.a.x);
-       vy:=(AY - ext.a.y) /(ext.b.y - ext.a.y)*21;
+       vy:=(AY - ext.a.y) /(ext.b.y - ext.a.y)*20;
 
        indy:=round(vy);
        if  (vx<= 1) and (vx>=0) and (indy<=20)  and (indy>=0) then
