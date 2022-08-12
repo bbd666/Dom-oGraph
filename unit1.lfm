@@ -4195,6 +4195,7 @@ object Form1: TForm1
         Title.LabelBrush.Style = bsClear
       end    
       item
+        Intervals.Options = [aipUseMaxLength, aipUseNiceSteps]
         Alignment = calBottom
         Marks.LabelFont.Height = -8
         Marks.Format = '%1.0f'
@@ -4212,6 +4213,7 @@ object Form1: TForm1
       ''
     )
     Title.Visible = True
+    OnAfterPaint = Chart2AfterPaint
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clActiveCaption
     Visible = False
@@ -4525,6 +4527,7 @@ object Form1: TForm1
     Title.Text.Strings = (
       'TAChart'
     )
+    OnAfterPaint = Chart3AfterPaint
     Anchors = [akTop, akLeft, akRight]
     Color = clActiveCaption
     Visible = False

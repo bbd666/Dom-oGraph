@@ -56,6 +56,8 @@ type
     StatusBar1: TStatusBar;
     Timer1: TTimer;
     procedure Button1Click(Sender: TObject);
+    procedure Chart2AfterPaint(ASender: TChart);
+    procedure Chart3AfterPaint(ASender: TChart);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure defil_checkChange(Sender: TObject);
@@ -387,6 +389,30 @@ begin
   end;
   Closefile(Fich);
   Closefile(Fichout);
+end;
+
+procedure TForm1.Chart2AfterPaint(ASender: TChart);
+var
+   range:real;
+begin
+  range:=abs((chart2.CurrentExtent.a.X)-(chart2.CurrentExtent.b.X));
+  if (range>=0.001) and (range<0.01) then  chart2.BottomAxis.Marks.Format:='%1.4f';
+  if (range>=0.01) and (range<0.1) then  chart2.BottomAxis.Marks.Format:='%1.3f';
+  if (range>=0.1) and (range<1) then  chart2.BottomAxis.Marks.Format:='%1.2f';
+  if (range>=1) and (range<10) then  chart2.BottomAxis.Marks.Format:='%1.1f';
+  if (range>=10) and (range<1000) then  chart2.BottomAxis.Marks.Format:='%1.0f';
+end;
+
+procedure TForm1.Chart3AfterPaint(ASender: TChart);
+var
+   range:real;
+begin
+  range:=abs((chart3.CurrentExtent.a.X)-(chart3.CurrentExtent.b.X));
+  if (range>=0.001) and (range<0.01) then  chart3.BottomAxis.Marks.Format:='%1.4f';
+  if (range>=0.01) and (range<0.1) then  chart3.BottomAxis.Marks.Format:='%1.3f';
+  if (range>=0.1) and (range<1) then  chart3.BottomAxis.Marks.Format:='%1.2f';
+  if (range>=1) and (range<10) then  chart3.BottomAxis.Marks.Format:='%1.1f';
+  if (range>=10) and (range<1000) then  chart3.BottomAxis.Marks.Format:='%1.0f';
 end;
 
 procedure TForm1.CheckBox2Click(Sender: TObject);
