@@ -19,6 +19,7 @@ type
     BarGraph: TBarSeries;
     Chart2: TChart;
     Chart3: TChart;
+    gbox: TGroupBox;
     leq_visib: TCheckBox;
     colorsource: TListChartSource;
     Label3: TLabel;
@@ -62,6 +63,7 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure defil_checkChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
      procedure LabeledEdit1DblClick(Sender: TObject);
     procedure LabeledEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure laeq_visibChange(Sender: TObject);
@@ -370,6 +372,18 @@ begin
     SetLength(spectres,21);
     PopulateColorSource;
 
+end;
+
+procedure TForm1.FormResize(Sender: TObject);
+const
+   decal=10;
+begin
+  chart1.Top:=gbox.Top-decal;
+  chart1.height:=round(gbox.height/3);
+  chart3.Top:=gbox.Top+round(gbox.height/3)-decal;
+  chart3.height:=round(gbox.height/3);
+  chart2.Top:=gbox.Top+2*round(gbox.height/3)-decal;
+  chart2.height:=round(0.95*gbox.height/3);
 end;
 
 procedure TForm1.CheckBox1Click(Sender: TObject);

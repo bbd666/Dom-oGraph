@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="project1.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="126"/>
+        <UsageCount Value="127"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -20,48 +20,30 @@
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="248"/>
-        <CursorPos X="59" Y="261"/>
-        <UsageCount Value="126"/>
+        <TopLine Value="362"/>
+        <CursorPos X="52" Y="385"/>
+        <UsageCount Value="127"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\components\tachart\tacustomseries.pas"/>
         <UnitName Value="TACustomSeries"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="1173"/>
         <CursorPos X="41" Y="1148"/>
         <UsageCount Value="56"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\graphics.pp"/>
         <UnitName Value="Graphics"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="237"/>
         <CursorPos X="12" Y="259"/>
         <UsageCount Value="29"/>
-        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="224" Column="19" TopLine="193"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="283" Column="14" TopLine="251"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="288" Column="60" TopLine="256"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="293" Column="14" TopLine="261"/>
-      </Position>
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="298" Column="14" TopLine="267"/>
@@ -165,6 +147,22 @@
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="232" Column="17" TopLine="201"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="261" Column="59" TopLine="248"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="263" Column="59" TopLine="250"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="380" Column="36" TopLine="376"/>
+      </Position>
+      <Position>
+        <Filename Value="unit1.pas"/>
+        <Caret Line="384" Column="38" TopLine="361"/>
       </Position>
     </JumpHistory>
     <RunParams>
