@@ -152,13 +152,8 @@ begin
   begin
        vx:=(AX - ext.a.x) /(ext.b.x - ext.a.x);
        vy:=(AY - ext.a.y) /(ext.b.y - ext.a.y)*21;
-      { //indx:=min(round(vx),1);
-       indy:=min(round(vy),20);
-       indx:=max(indx,0);
-       indy:=max(indy,0);
-       indy:=round(ay);
-       indx:=round(ax); }
-        indy:=round(vy);
+
+       indy:=round(vy);
        if  (vx<= 1) and (vx>=0) and (indy<=20)  and (indy>=0) then
        AZ:=spectres[indy,round(vx*length(spectres[0]))];
        if round(resol*vx)=round(resol*sel_spectre.Position/sel_spectre.Max) then AZ:=2*palier[4]*fullscale;
@@ -431,7 +426,11 @@ end;
 
 procedure TForm1.defil_checkChange(Sender: TObject);
 begin
-  if defil_check.checked then timer1.Enabled:=true else timer1.Enabled:=false;
+  if defil_check.checked then timer1.Enabled:=true else
+    begin
+         timer1.Enabled:=false;
+         chart3.Repaint;
+    end;
 end;
 
 procedure TForm1.ScrollBar1Change(Sender: TObject);
