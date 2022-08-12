@@ -5,9 +5,10 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls, math,
-  Menus, StdCtrls, TAGraph, TASeries, TATransformations, TAIntervalSources,DateUtils,
-  TAChartUtils, TADbSource, TASources, TAFuncSeries, TAExpressionSeries , TACustomSource, LCLType,inifiles;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
+  math, Menus, StdCtrls, TAGraph, TASeries, TATransformations,
+  TAIntervalSources, DateUtils, TAChartUtils, TADbSource, TASources,
+  TAFuncSeries, TAExpressionSeries, TACustomSource, LCLType, ColorBox, inifiles;
 
 type
 
@@ -384,6 +385,11 @@ begin
   chart3.height:=round(gbox.height/3);
   chart2.Top:=gbox.Top+2*round(gbox.height/3)-decal;
   chart2.height:=round(0.95*gbox.height/3);
+  chart1.left:=0;
+  chart2.left:=0;
+  chart3.left:=0;
+  chart2.width:=chart3.width;
+  chart1.width:=chart3.width;
 end;
 
 procedure TForm1.CheckBox1Click(Sender: TObject);

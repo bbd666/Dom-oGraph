@@ -4420,10 +4420,10 @@ object Form1: TForm1
     ClientWidth = 612
     TabOrder = 10
     object Chart1: TChart
-      Left = -8
+      Left = -149
       Height = 176
       Top = 0
-      Width = 617
+      Width = 758
       AxisList = <      
         item
           Grid.Visible = False
@@ -4461,7 +4461,7 @@ object Form1: TForm1
       Left = 0
       Height = 152
       Top = 180
-      Width = 617
+      Width = 620
       AxisList = <      
         item
           Grid.Visible = False
@@ -4490,6 +4490,8 @@ object Form1: TForm1
           Title.LabelBrush.Style = bsClear
         end>
       BackColor = clActiveCaption
+      Legend.UseSidebar = False
+      Legend.Visible = True
       Title.Text.Strings = (
         'TAChart'
       )
@@ -4498,6 +4500,8 @@ object Form1: TForm1
       Color = clActiveCaption
       Visible = False
       object map: TColorMapSeries
+        Legend.Multiplicity = lmPoint
+        Legend.UserItemsCount = 5
         ColorSource = colorsource
         Interpolate = True
         StepX = 1
@@ -4506,10 +4510,10 @@ object Form1: TForm1
       end
     end
     object Chart2: TChart
-      Left = 0
+      Left = -141
       Height = 176
       Top = 336
-      Width = 617
+      Width = 758
       AxisList = <      
         item
           Marks.LabelBrush.Style = bsClear
