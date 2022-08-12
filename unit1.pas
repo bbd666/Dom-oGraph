@@ -251,6 +251,27 @@ begin
             spot.AddXY(nowtime,100);
 
             resol:=sel_spectre.max/ep;
+            dose_lbl.text:=floattostrf(laeqt+10*ln(duree/8)/ln(10),fffixed,5,2);
+            if duree>8 then
+            begin
+                 dose_lbl.Font.Color:=clDefault;
+                 dose_lbl.color:=clGrayText;
+                 dose_lbl.hint:='Attention : durée d''exposition > 8 h' ;
+            end
+            else
+            if (laeqt+10*ln(duree/8)/ln(10))>85 then
+            begin
+                 dose_lbl.color:=clRed;
+                 dose_lbl.Font.Color:=clDefault;
+                 dose_lbl.hint:='Attention : dépassement de la valeur réglementaire' ;
+            end
+            else
+            begin
+                 dose_lbl.Font.Color:=clDefault;
+                 dose_lbl.Font.Color:=clDefault;
+                 dose_lbl.hint:='Dose de bruit normalisée sur 8 heures' ;
+            end;
+
 
          finally
          end;
@@ -449,7 +470,6 @@ begin
   current_laeq.text:=floattostrf(niveau_laeq[sel_spectre.Position],fffixed,5,2);
   laeqt_lbl.text:=floattostrf(laeqt,fffixed,5,2);
   duree_lbl.text:=floattostrf(duree,fffixed,5,2);
-  dose_lbl.text:=floattostrf(laeqt+10*ln(duree/8)/ln(10),fffixed,5,2);
   spot.XValue[0]:=Temps[sel_spectre.Position]/timefactor;
   spot.xvalue[1]:=Temps[sel_spectre.Position]/timefactor;
   if not(defil_check.Checked) then chart3.Repaint;
